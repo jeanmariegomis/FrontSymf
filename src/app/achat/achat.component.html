@@ -1,0 +1,55 @@
+
+
+<body>
+
+  <!--  ********** HEADER SECTION ********** -->
+  <div id="h">
+    <div class="container">
+      <div class="row centered">
+
+        <h1>Vos achats en ligne</h1>
+
+        <div id="contact">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3 col-md-offset-2">
+                    <form  #monForm= ngForm (ngSubmit)="OnSubmit(prix, tel)" class="contact-form php-mail-form" role="form" >        
+                    <div class="form-group">
+                        <select  ngModel #prix  name="prix" placeholder="Prix" class="form-control" >
+                          <option   value="1000" >1000</option>
+                          <option   value="3000" >3000</option>
+                          <option   value="5000" >5000</option>
+          
+                        </select>                       
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="phone" ng2TelInput (hasError)="hasError($event)" ngModel #tel name="tel" class="form-control"  placeholder="Telephone" data-rule="phone" data-msg="Entrer un numéro validé svp!" (ng2TelOutput)="getNumber($event)" (intlTelInputObject)="telInputObject($event)"   (countryChange)="onCountryChange($event)">                      <div class="validate"></div>
+                    </div>
+
+                    <div class="form-send">
+                      <button onclick="buy()" type="submit" class="btn btn-large">Validez</button>
+                    </div>
+        
+                  </form>
+        
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        
+      </div>
+    </div>
+  </div>
+
+
+  
+
+
+
+ 
+
+</body>

@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>FrontSymf</title>
+  <base href="/">
+
+
+
+
+  <meta charset="utf-8">
+  <meta name="author" content="PayExpresse">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/owl.carousel.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/turquoise.css" class="colors">
+<link rel="shortcut icon" href="img/ico/32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="img/ico/60.png" type="image/png">
+<link rel="apple-touch-icon" sizes="72x72" href="img/ico/72.png" type="image/png">
+<link rel="apple-touch-icon" sizes="120x120" href="img/ico/120.png" type="image/png">
+<link rel="apple-touch-icon" sizes="152x152" href="img/ico/152.png" type="image/png">
+  <link rel="stylesheet" href="https://cdn.payexpresse.com/v1/payexpresse.min.css">
+
+  <meta property="og:site_name" content="PayExpresse">
+  <meta property="og:title" content="PayExpresse">
+  <meta property="og:description"
+        content="PayExpresse | Boutique Démo">
+  <meta property="og:image" content="https://sample.payexpresse.com/img/snapshoot.png">
+  <meta property="og:url" content="https://sample.payexpresse.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="generator"
+        content="PayExpresse | Boutique Démo"/>
+  <script src="https://cdn.payexpresse.com/v1/payexpresse.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://www.googletagmanager.com/gtag/js?id=UA-30125205-11"></script>
+  <script>
+      if(location.hostname !== "localhost" || location.hostname !== "127.0.0.1"){
+          $.getScript( "https://sample.payexpresse.com/js/analytic.js", function( data, textStatus, jqxhr ) {
+              console.log( "Load analytics 2 was performed." );
+          });
+      }
+  </script>
+  <style>
+      .hidden{
+          display: none !important;
+      }
+  </style>
+
+  <script>
+      function buy(btn) {
+          $('.close-modal').click();
+
+          setTimeout(function () {
+              var selector = pQuery(btn);
+
+              (new PayExpresse({
+                  item_id          :   1,
+              })).withOption({
+                  requestTokenUrl           :   'http://localhost:80/Boutique%20test/paiement.php',
+                  method              :   'POST',
+                  headers             :   {
+                      "Accept"          :    "text/html"
+                  },
+                  prensentationMode   :   PayExpresse.OPEN_IN_POPUP,
+                  didPopupClosed: function (is_completed, success_url, cancel_url) {
+                      window.location.href = is_completed === true ? success_url  : cancel_url;
+                  },
+                  willGetToken        :   function () {
+                      console.log("Je me prepare a obtenir un token");
+                      selector.prop('disabled', true);
+                  },
+                  didGetToken         : function (token, redirectUrl) {
+                      console.log("Mon token est : " +  token  + ' et url est ' + redirectUrl );
+                      selector.prop('disabled', false);
+                  },
+                  didReceiveError: function (error) {
+                      console.log('erreur inconnu', error.toString());
+                      selector.prop('disabled', false);
+                  },
+                  didReceiveNonSuccessResponse: function (jsonResponse) {
+                      console.log('non success response ',jsonResponse);
+                      alert(jsonResponse.errors);
+                      selector.prop('disabled', false);
+                  }
+              }).send({
+                  pageBackgroundRadianStart:'#0178bc',
+                  pageBackgroundRadianEnd:'#00bdda',
+                  pageTextPrimaryColor:'#333',
+                  paymentFormBackground:'#fff',
+                  navControlNextBackgroundRadianStart:'#608d93',
+                  navControlNextBackgroundRadianEnd:'#28314e',
+                  navControlCancelBackgroundRadianStar:'#28314e',
+                  navControlCancelBackgroundRadianEnd:'#608d93',
+                  navControlTextColor:'#fff',
+                  paymentListItemTextColor:'#555',
+                  paymentListItemSelectedBackground:'#eee',
+                  commingIconBackgroundRadianStart:'#0178bc',
+                  commingIconBackgroundRadianEnd:'#00bdda',
+                  commingIconTextColor:'#fff',
+                  formInputBackgroundColor:'#eff1f2',
+                  formInputBorderTopColor:'#e3e7eb',
+                  formInputBorderLeftColor:'#7c7c7c',
+                  totalIconBackgroundRadianStart:'#0178bc',
+                  totalIconBackgroundRadianEnd:'#00bdda',
+                  formLabelTextColor:'#292b2c',
+                  alertDialogTextColor:'#333',
+                  alertDialogConfirmButtonBackgroundColor:'#0178bc',
+                  alertDialogConfirmButtonTextColor:'#fff'
+              });
+          }, 500)
+
+      }
+  </script>
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+
+  <!-- Bootstrap CSS File -->
+  <link href="assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="assets/lib/unveil-effects/animations.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+</head>
+<body>
+  <app-root></app-root>
+
+
+
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+  <script type="text/javascript" src="js/core.js"></script>
+  <script type="text/javascript" src="js/menu-overlay.js"></script>
+  <script type="text/javascript" src="js/placeholders.min.js"></script>
+  <!-- end core scripts --> 
+  <!-- sliders -->
+  <script type="text/javascript" src="js/owl.carousel.min.js"></script>   	
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.waitforimages/2.4.0/jquery.waitforimages.min.js"></script> 
+   <script type="text/javascript" src="js/sliders.js"></script>
+<script type="text/javascript" src="js/jquery.counterup.min.js"></script>
+<script type="text/javascript" src="js/numbers.js"></script>
+<script type="text/javascript" src="js/contact.js"></script>
+<script type="text/javascript" src="js/parallax.js"></script>
+<script type="text/javascript" src="js/ga.js"></script>
+
+
+  <script src="assets/lib/jquery/jquery.min.js"></script>
+  <script src="assets/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/lib/php-mail-form/validate.js"></script>
+  <script src="assets/lib/unveil-effects/unveil-effects.js"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>
